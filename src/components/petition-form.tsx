@@ -1,16 +1,30 @@
 import { Box, Button, InputLabel, TextField } from "@mui/material";
+import axios from "axios";
 import { FormEvent, useState } from "react";
 
 const PetitionForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(name);
-    console.log(email);
+    if (name !== "" || email !== "") {
+      try {
+        setLoading(true);
+        await axios.post(`/api/save`, {
+          name,
+          email,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("fbhwekl");
+    }
   };
   return (
-    <Box component="form" onSubmit={(event) => handleSubmit(event)}>
+    <Box component="form" onSubmit={(event) => handleSubmit(event)} mb={4}>
       <Box mb={2}>
         <InputLabel htmlFor="name" sx={{ mb: 1 }}>
           Name
@@ -36,7 +50,7 @@ const PetitionForm = () => {
           type="email"
         />
       </Box>
-      <Button type="submit" variant="contained" fullWidth>
+      <Button type="submit" variant="contained" fullWidth disabled={loading}>
         Sign
       </Button>
     </Box>

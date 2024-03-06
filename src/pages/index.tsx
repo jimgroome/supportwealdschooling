@@ -6,6 +6,13 @@ const Home = () => {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12}>
+          <Typography variant="h4" component="h1" mb={4}>
+            Support Weald Schooling
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
           <Typography variant="body1" mb={2}>
             Does your child have to travel miles to and from school each day?
           </Typography>
