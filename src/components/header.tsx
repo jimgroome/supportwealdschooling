@@ -9,7 +9,12 @@ const Header = () => (
           Support Weald Schooling
         </Typography>
         <Box flexGrow={1}></Box>
-        <IconButton size="large" color="inherit">
+        <IconButton
+          size="large"
+          color="inherit"
+          href="https://www.facebook.com/profile.php?id=61557074941190"
+          target="_blank"
+        >
           <FacebookIcon />
         </IconButton>
       </Toolbar>
