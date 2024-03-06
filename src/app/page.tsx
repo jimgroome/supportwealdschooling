@@ -1,8 +1,7 @@
-import Header from "@/components/header";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const Home = () => (
-  <Grid container spacing={2}>
+  <Grid container>
     <Grid item xs={12}>
       <Typography variant="body1">Petition coming soon.</Typography>
     </Grid>
