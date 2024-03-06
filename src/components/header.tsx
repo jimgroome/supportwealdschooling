@@ -1,13 +1,21 @@
-import { Grid, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Header = () => (
-  <Grid container mb={4} pt={2}>
-    <Grid item xs={12}>
-      <Typography variant="h3" component="h1">
-        Support Weald Schooling
-      </Typography>
-    </Grid>
-  </Grid>
+  <>
+    <AppBar position="fixed">
+      <Toolbar>
+        <Typography variant="h5" component="h1">
+          Support Weald Schooling
+        </Typography>
+        <Box flexGrow={1}></Box>
+        <IconButton size="large" color="inherit">
+          <FacebookIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+    <Toolbar sx={{ mb: 4 }} />
+  </>
 );
 
 export default Header;

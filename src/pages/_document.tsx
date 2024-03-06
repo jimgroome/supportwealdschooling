@@ -8,8 +8,9 @@ export default function Document() {
       <Head />
       <body>
         <CssBaseline />
+        <Header />
         <Container>
-          <Header />
+          {/* <Header /> */}
           <Main />
         </Container>
         <NextScript />
