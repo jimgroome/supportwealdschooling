@@ -3,6 +3,8 @@ import AWS from "aws-sdk";
 
 AWS.config.update({
   region: "eu-west-2",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
 });
 
 const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
@@ -12,7 +14,7 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     await DynamoDB.put(
       {
-        TableName: process.env.DYNAMO_DB_PETITION_REPONSES_TABLE as string,
+        TableName: process.env.DYNAMO_DB_PETITION_RESPONSES_TABLE as string,
         Item: {
           email,
           name,
