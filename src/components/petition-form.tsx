@@ -1,30 +1,12 @@
+import useFormStore from "@/stores/formStore";
 import { Box, Button, InputLabel, TextField } from "@mui/material";
 import axios from "axios";
 import { FormEvent, useState } from "react";
 
 const PetitionForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (name !== "" || email !== "") {
-      try {
-        setLoading(true);
-        await axios.post(`/api/save`, {
-          name,
-          email,
-        });
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      alert("fbhwekl");
-    }
-  };
+  const { loading, name, setName, email, setEmail, submit } = useFormStore();
   return (
-    <Box component="form" onSubmit={(event) => handleSubmit(event)} mb={4}>
+    <Box component="form" onSubmit={(event) => submit(event)} mb={4}>
       <Box mb={2}>
         <InputLabel htmlFor="name" sx={{ mb: 1 }}>
           Name

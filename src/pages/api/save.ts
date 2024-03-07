@@ -1,36 +1,44 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import AWS from "aws-sdk";
+
+AWS.config.update({
+  region: "eu-west-2",
+});
 
 const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const client = new MongoClient(process.env.MONGODB_URL as string, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-
   try {
     const { name, email } = req.body;
+    const DynamoDB = new AWS.DynamoDB.DocumentClient();
 
-    await client.connect();
-    await client
-      .db("supportWealdSchooling")
-      .collection("petitionResponses")
-      .insertOne({ email, name });
-    res.status(200).json({
-      name: "Pinged your deployment. You successfully connected to MongoDB!",
-    });
+    await DynamoDB.put(
+      {
+        TableName: process.env.DYNAMO_DB_PETITION_REPONSES_TABLE as string,
+        Item: {
+          email,
+          name,
+        },
+        ConditionExpression: "attribute_not_exists(email)",
+      },
+      (error) => {
+        if (error) {
+          if (error.statusCode === 400) {
+            return res.status(400).json({ response: "That didn't work" });
+          }
+        } else {
+          return res.status(200).json({
+            response: "Name added",
+          });
+        }
+      }
+    );
   } catch (e) {
     console.log(e);
-    res.status(500).json({ name: "That didn't work" });
-  } finally {
-    await client.close();
+    res.status(500).json({ response: "That didn't work" });
   }
 };
 
 type Data = {
-  name: string;
+  response: string;
 };
 
 export default save;
