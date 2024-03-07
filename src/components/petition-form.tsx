@@ -1,7 +1,5 @@
 import useFormStore from "@/stores/formStore";
 import { Box, Button, InputLabel, TextField } from "@mui/material";
-import axios from "axios";
-import { FormEvent, useState } from "react";
 
 const PetitionForm = () => {
   const { loading, name, setName, email, setEmail, submit } = useFormStore();
