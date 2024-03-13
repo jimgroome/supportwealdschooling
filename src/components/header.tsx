@@ -1,5 +1,6 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { facebookUrl } from "@/consts";
 
 const Header = () => (
   <>
@@ -12,7 +13,7 @@ const Header = () => (
         <IconButton
           size="large"
           color="inherit"
-          href="https://www.facebook.com/profile.php?id=61557074941190"
+          href={facebookUrl}
           target="_blank"
         >
           <FacebookIcon />

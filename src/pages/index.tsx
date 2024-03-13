@@ -2,7 +2,7 @@ import Fail from "@/components/fail";
 import Start from "@/components/start";
 import Success from "@/components/success";
 import useFormStore from "@/stores/formStore";
-import { Grid, Link, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Head from "next/head";
 
 const Home = () => {
@@ -23,13 +23,6 @@ const Home = () => {
       {!success && !fail ? <Start /> : null}
       {success ? <Success /> : null}
       {fail ? <Fail /> : null}
-      <Grid container>
-        <Grid item xs={12}>
-          <Link href="/privacy">
-            <Typography variant="body2">Privacy</Typography>
-          </Link>
-        </Grid>
-      </Grid>
     </>
   );
 };

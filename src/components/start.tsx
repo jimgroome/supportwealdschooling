@@ -1,43 +1,48 @@
 import { Grid, Typography } from "@mui/material";
 import PetitionForm from "./petition-form";
+import Link from "next/link";
+import { facebookUrl } from "@/consts";
 
 const Start = () => (
   <>
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <Typography variant="body1" mb={2}>
-          Does your child have to travel miles to and from school each day?
+          Support Weald Schooling is a campaign which is working to get a new,
+          non selective senior school built to serve a large area of The Weald.
+          There is no such provision for many miles for a lot of children. This
+          is unacceptable.
         </Typography>
 
         <Typography variant="body1" mb={2}>
-          Does it mean your child&rsquo;s schoolfriends live miles away?
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          Is your child dependent upon school bus timetables?
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          Does this mean not participating in after school activities?
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          Or do you have to fight the traffic to get your child to school?
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          This is unacceptable: our children deserve and need better!
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          Sign the petition expressing your concern and demanding action be
-          taken to build a new secondary school for The Weald.
+          We need your support. Please register your concern by signing the
+          petition calling for a new school, which will go to the Department for
+          Education.
         </Typography>
       </Grid>
     </Grid>
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <PetitionForm />
+      </Grid>
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={6}>
+        <Typography variant="body1" mb={2}>
+          For a detailed analysis of the situation please{" "}
+          <Link href={facebookUrl} target="_blank">
+            follow our Facebook page
+          </Link>
+          . Updates from the campaign will be posted here regularly. They can
+          also be accessed on{" "}
+          <Link
+            href="https://cranbrookandsissinghurstpc.co.uk/"
+            target="_blank"
+          >
+            your parish council website
+          </Link>
+          .
+        </Typography>
       </Grid>
     </Grid>
   </>
