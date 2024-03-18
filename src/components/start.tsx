@@ -9,9 +9,9 @@ const Start = () => (
       <Grid item xs={12} md={6}>
         <Typography variant="body1" mb={2}>
           Support Weald Schooling is a campaign which is working to get a new,
-          non selective senior school built to serve a large area of The Weald.
-          There is no such provision for many miles for a lot of children. This
-          is unacceptable.
+          non selective secondary school built to serve a large area of The
+          Weald. There is no such provision for many miles for a lot of
+          children. This is unacceptable.
         </Typography>
 
         <Typography variant="body1" mb={2}>
