@@ -7,8 +7,10 @@ interface FormState {
   setLoading: (loading: boolean) => void;
   name: string;
   email: string;
+  postcode: string;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
+  setPostcode: (postcode: string) => void;
   submit: (event: FormEvent<HTMLFormElement>) => void;
   success: boolean;
   fail: boolean;
@@ -21,17 +23,20 @@ const useFormStore = create<FormState>((set, get) => ({
   setLoading: (loading) => set({ loading }),
   name: "",
   email: "",
+  postcode: "",
   setName: (name) => set({ name }),
   setEmail: (email) => set({ email }),
+  setPostcode: (postcode) => set({ postcode }),
   submit: async (event) => {
     event.preventDefault();
-    const { name, email, setLoading, setFail, setSuccess } = get();
+    const { name, email, postcode, setLoading, setFail, setSuccess } = get();
     if (name !== "" || email !== "") {
       try {
         setLoading(true);
         await axios.post(`/api/save`, {
           name,
           email,
+          postcode,
         });
         setSuccess(true);
       } catch (error) {

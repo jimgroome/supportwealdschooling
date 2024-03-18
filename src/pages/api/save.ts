@@ -9,7 +9,7 @@ AWS.config.update({
 
 const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, postcode } = req.body;
     const DynamoDB = new AWS.DynamoDB.DocumentClient();
 
     await DynamoDB.put(
@@ -18,6 +18,7 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         Item: {
           email,
           name,
+          postcode,
         },
         ConditionExpression: "attribute_not_exists(email)",
       },
