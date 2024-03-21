@@ -1,4 +1,5 @@
 import Fail from "@/components/fail";
+import SiteHeader from "@/components/header";
 import Start from "@/components/start";
 import Success from "@/components/success";
 import useFormStore from "@/stores/formStore";
@@ -13,13 +14,8 @@ const Home = () => {
         <title>Support Weald Schooling</title>
       </Head>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h4" component="h1" mb={4}>
-            Support Weald Schooling
-          </Typography>
-        </Grid>
-      </Grid>
+      <SiteHeader />
+
       {!success && !fail ? <Start /> : null}
       {success ? <Success /> : null}
       {fail ? <Fail /> : null}

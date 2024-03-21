@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import PetitionForm from "./petition-form";
 import Link from "next/link";
 import { facebookUrl } from "@/consts";
@@ -13,7 +13,6 @@ const Start = () => (
           Weald. There is no such provision for many miles for a lot of
           children. This is unacceptable.
         </Typography>
-
         <Typography variant="body1" mb={2}>
           We need your support. Please register your concern by signing the
           petition calling for a new school, which will go to the Department for
@@ -34,14 +33,7 @@ const Start = () => (
             follow our Facebook page
           </Link>
           . Updates from the campaign will be posted here regularly. They can
-          also be accessed on{" "}
-          <Link
-            href="https://cranbrookandsissinghurstpc.co.uk/"
-            target="_blank"
-          >
-            your parish council website
-          </Link>
-          .
+          also be accessed on your parish council website.
         </Typography>
       </Grid>
     </Grid>
