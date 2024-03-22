@@ -11,6 +11,8 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     const { name, email, postcode } = req.body;
     const DynamoDB = new AWS.DynamoDB.DocumentClient();
+    const now = new Date();
+    const time = now.toISOString();
 
     await DynamoDB.put(
       {
@@ -19,6 +21,7 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
           email,
           name,
           postcode,
+          time,
         },
         ConditionExpression: "attribute_not_exists(email)",
       },
