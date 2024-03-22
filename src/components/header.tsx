@@ -31,7 +31,6 @@ const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    console.log("fewfew");
     setMobileOpen(!mobileOpen);
   };
 
@@ -60,7 +59,6 @@ const SiteHeader = () => {
                 sx={{ color: "#fff" }}
                 href={item.href}
                 target={item.target || undefined}
-                onClick={() => console.log("object")}
               >
                 {item.text}
               </Button>
