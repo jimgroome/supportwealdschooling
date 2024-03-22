@@ -1,6 +1,5 @@
 import { Container, CssBaseline } from "@mui/material";
 import { Html, Head, Main, NextScript } from "next/document";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 const Document = () => (
   <Html lang="en">
@@ -11,7 +10,6 @@ const Document = () => (
         <Main />
       </Container>
       <NextScript />
-      <GoogleAnalytics gaId="G-PWM6CGKJG0" />
     </body>
   </Html>
 );
