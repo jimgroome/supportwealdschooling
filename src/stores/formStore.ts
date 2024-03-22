@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FormEvent } from "react";
 import { create } from "zustand";
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface FormState {
   loading: boolean;
@@ -37,6 +38,10 @@ const useFormStore = create<FormState>((set, get) => ({
           name,
           email,
           postcode,
+        });
+        sendGAEvent({
+          event: "Form submission",
+          value: { name, email, postcode },
         });
         setSuccess(true);
       } catch (error) {
