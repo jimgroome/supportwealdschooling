@@ -17,6 +17,8 @@ interface FormState {
   fail: boolean;
   setSuccess: (success: boolean) => void;
   setFail: (fail: boolean) => void;
+  getCount: () => void;
+  count: string;
 }
 
 const useFormStore = create<FormState>((set, get) => ({
@@ -55,6 +57,11 @@ const useFormStore = create<FormState>((set, get) => ({
   fail: false,
   setSuccess: (success) => set({ success }),
   setFail: (fail) => set({ fail }),
+  getCount: async () => {
+    const res = await axios.get("/api/count");
+    set({ count: res.data.response });
+  },
+  count: "",
 }));
 
 export default useFormStore;
