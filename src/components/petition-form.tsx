@@ -1,5 +1,12 @@
 import useFormStore from "@/stores/formStore";
-import { Box, Button, InputLabel, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 
 const PetitionForm = () => {
   const {
@@ -10,6 +17,8 @@ const PetitionForm = () => {
     setEmail,
     postcode,
     setPostcode,
+    optIn,
+    setOptIn,
     submit,
   } = useFormStore();
   return (
@@ -51,6 +60,14 @@ const PetitionForm = () => {
           fullWidth
           type="text"
           sx={{ textTransform: "uppercase" }}
+        />
+      </Box>
+      <Box mb={2}>
+        <FormControlLabel
+          control={
+            <Checkbox checked={optIn} onChange={() => setOptIn(!optIn)} />
+          }
+          label="Keep up to date with news about this campaign. We'll keep communication to a minimum."
         />
       </Box>
       <Button type="submit" variant="contained" fullWidth disabled={loading}>

@@ -9,9 +9,11 @@ interface FormState {
   name: string;
   email: string;
   postcode: string;
+  optIn: boolean;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
   setPostcode: (postcode: string) => void;
+  setOptIn: (optIn: boolean) => void;
   submit: (event: FormEvent<HTMLFormElement>) => void;
   success: boolean;
   fail: boolean;
@@ -27,12 +29,15 @@ const useFormStore = create<FormState>((set, get) => ({
   name: "",
   email: "",
   postcode: "",
+  optIn: true,
+  setOptIn: (optIn) => set({ optIn }),
   setName: (name) => set({ name }),
   setEmail: (email) => set({ email }),
   setPostcode: (postcode) => set({ postcode }),
   submit: async (event) => {
     event.preventDefault();
-    const { name, email, postcode, setLoading, setFail, setSuccess } = get();
+    const { name, email, postcode, optIn, setLoading, setFail, setSuccess } =
+      get();
     if (name !== "" || email !== "") {
       try {
         setLoading(true);
@@ -40,10 +45,11 @@ const useFormStore = create<FormState>((set, get) => ({
           name,
           email,
           postcode,
+          optIn,
         });
         sendGAEvent({
           event: "Form submission",
-          value: { name, email, postcode },
+          value: { name, email, postcode, optIn },
         });
         setSuccess(true);
       } catch (error) {
