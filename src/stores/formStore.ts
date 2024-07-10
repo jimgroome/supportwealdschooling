@@ -21,6 +21,8 @@ interface FormState {
   setFail: (fail: boolean) => void;
   getCount: () => void;
   count: string;
+  getSurvey: () => void;
+  survey: { year: string; count: number }[];
 }
 
 const useFormStore = create<FormState>((set, get) => ({
@@ -68,6 +70,11 @@ const useFormStore = create<FormState>((set, get) => ({
     set({ count: res.data.response });
   },
   count: "",
+  getSurvey: async () => {
+    const res = await axios.get("/api/survey");
+    set({ survey: JSON.parse(res.data.response) });
+  },
+  survey: [],
 }));
 
 export default useFormStore;
