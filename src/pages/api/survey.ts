@@ -11,7 +11,7 @@ const survey = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
 
     const tfRequest = await tf.responses.list({
-      uid: "E3thXaWp",
+      uid: "PY1gma4b",
       pageSize: 1000,
       completed: true,
     });
@@ -24,6 +24,7 @@ const survey = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     );
 
     let years = [
+      { year: "Preschool/nursery", count: 0 },
       { year: "Reception", count: 0 },
       { year: "1", count: 0 },
       { year: "2", count: 0 },
@@ -38,9 +39,9 @@ const survey = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       const agreeResponse = response.answers?.find(
         (answer) => answer.field?.ref === yearFieldId
       );
-      const responseYear = agreeResponse?.choice?.label;
+      const responseYears = agreeResponse?.choices?.labels;
       years.map((year) => {
-        if (year.year === responseYear) {
+        if (responseYears?.includes(year.year)) {
           year.count++;
         }
         if (year.year === "Total") {

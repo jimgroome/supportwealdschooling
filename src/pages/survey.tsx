@@ -22,7 +22,7 @@ const Survey = () => {
         <TableHead>
           <TableRow>
             <TableCell>Year</TableCell>
-            <TableCell>Count</TableCell>
+            <TableCell>Yes count</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
