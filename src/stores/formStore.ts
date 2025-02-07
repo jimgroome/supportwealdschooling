@@ -22,7 +22,11 @@ interface FormState {
   getCount: () => void;
   count: string;
   getSurvey: () => void;
-  survey: { year: string; count: number }[];
+  survey: {
+    years: { year: string; count: number }[];
+    grandTotal: number;
+    totalResponses: number;
+  };
 }
 
 const useFormStore = create<FormState>((set, get) => ({
@@ -74,7 +78,7 @@ const useFormStore = create<FormState>((set, get) => ({
     const res = await axios.get("/api/survey");
     set({ survey: JSON.parse(res.data.response) });
   },
-  survey: [],
+  survey: { years: [], grandTotal: 0, totalResponses: 0 },
 }));
 
 export default useFormStore;

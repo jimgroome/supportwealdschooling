@@ -32,8 +32,11 @@ const survey = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       { year: "4", count: 0 },
       { year: "5", count: 0 },
       { year: "6", count: 0 },
-      { year: "Total", count: 0 },
     ];
+
+    let grandTotal = 0;
+
+    let totalResponses = tfRequest.total_items;
 
     yes.map((response) => {
       const agreeResponse = response.answers?.find(
@@ -43,14 +46,14 @@ const survey = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       years.map((year) => {
         if (responseYears?.includes(year.year)) {
           year.count++;
-        }
-        if (year.year === "Total") {
-          year.count++;
+          grandTotal++;
         }
       });
     });
 
-    res.status(200).json({ response: JSON.stringify(years) });
+    res.status(200).json({
+      response: JSON.stringify({ years, grandTotal, totalResponses }),
+    });
   } catch (e) {
     console.log(e);
     res.status(500).json({ response: "That didn't work" });

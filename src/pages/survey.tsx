@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/header";
 import useFormStore from "@/stores/formStore";
 import {
+  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -18,23 +19,43 @@ const Survey = () => {
   return (
     <>
       <SiteHeader />
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Year</TableCell>
-            <TableCell>Yes count</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {survey.map((response) => (
-            <TableRow key={response.year}>
-              <TableCell>{response.year}</TableCell>
-              <TableCell>{response.count}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      {/* <Typography variant="body1">Total signatures: {count}</Typography> */}
+      {survey.years.length === 0 ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <Table sx={{ mb: 4 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <strong>Year</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>Yes count</strong>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {survey.years.map((year) => (
+                <TableRow key={year.year}>
+                  <TableCell>{year.year}</TableCell>
+                  <TableCell>{year.count}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow>
+                <TableCell>
+                  <strong>Grand total</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>{survey.grandTotal}</strong>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <Typography variant="body1">
+            Total responses: {survey.totalResponses}
+          </Typography>
+        </>
+      )}
     </>
   );
 };
