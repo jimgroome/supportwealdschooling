@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { facebookUrl } from "@/consts";
 
-const SiteHeader = () => {
+const SiteHeader = ({ hideHeader }: { hideHeader?: boolean }) => {
   const drawerWidth = 240;
 
   const navItems = [
@@ -105,13 +105,15 @@ const SiteHeader = () => {
       </nav>
 
       <Toolbar sx={{ mb: 4 }} />
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h4" component="h1" mb={4}>
-            Support Weald Schooling
-          </Typography>
+      {!hideHeader && (
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h4" component="h1" mb={4}>
+              Support Weald Schooling
+            </Typography>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </>
   );
 };

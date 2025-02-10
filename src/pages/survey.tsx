@@ -18,7 +18,7 @@ const Survey = () => {
   }, []);
   return (
     <>
-      <SiteHeader />
+      <SiteHeader hideHeader />
       {survey.years.length === 0 ? (
         <CircularProgress />
       ) : (
