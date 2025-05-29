@@ -1,22 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import AWS from "aws-sdk";
-import mailchimp from "@mailchimp/mailchimp_marketing";
+import { ContactsApi } from "@getbrevo/brevo";
 
 AWS.config.update({
   region: "eu-west-2",
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,
 });
-
-mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY,
-  server: "us14",
-});
-
-async function callPing() {
-  const response = await mailchimp.ping.get();
-  console.log(response);
-}
 
 const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
@@ -26,12 +16,17 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const time = now.toISOString();
 
     if (optIn) {
-      await mailchimp.lists.addListMember("bcbcde27c6", {
-        email_address: email,
-        status: "subscribed",
-        merge_fields: {
-          FNAME: name,
+      const brevo = new ContactsApi();
+      brevo.setApiKey(0, process.env.BREVO_API_KEY as string);
+
+      await brevo.createContact({
+        email,
+        attributes: {
+          FIRSTNAME: name,
+          POSTCODE: postcode,
         },
+        listIds: [3],
+        updateEnabled: true,
       });
     }
 
@@ -59,6 +54,10 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
       }
     );
+
+    return res.status(200).json({
+      response: "Name added",
+    });
   } catch (e) {
     console.log(e);
     res.status(500).json({ response: "That didn't work" });
