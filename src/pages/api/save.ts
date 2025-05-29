@@ -58,9 +58,9 @@ const save = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     return res.status(200).json({
       response: "Name added",
     });
-  } catch (e) {
+  } catch (e: any) {
     console.log(e);
-    res.status(500).json({ response: "That didn't work" });
+    res.status(500).json({ response: e.message || "Internal Server Error" });
   }
 };
 
