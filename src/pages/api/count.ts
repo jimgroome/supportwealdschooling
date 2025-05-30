@@ -1,23 +1,26 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import AWS from "aws-sdk";
-
-AWS.config.update({
-  region: "eu-west-2",
-  accessKeyId: process.env.ACCESS_KEY_ID,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY,
-});
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 const count = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
-    const DynamoDB = new AWS.DynamoDB.DocumentClient();
+    const client = new DynamoDBClient({
+      region: "eu-west-2",
+      credentials: {
+        accessKeyId: process.env.ACCESS_KEY_ID as string,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY as string,
+      },
+    });
+    const docClient = DynamoDBDocumentClient.from(client);
 
-    const params = {
+    const command = new ScanCommand({
       TableName: process.env.DYNAMO_DB_PETITION_RESPONSES_TABLE as string,
       Select: "COUNT",
-    };
-    const count = await DynamoDB.scan(params).promise();
+    });
 
-    res.status(200).json({ response: count.Count?.toString() || "" });
+    const send = await docClient.send(command);
+
+    res.status(200).json({ response: send.Count?.toString() || "" });
   } catch (e) {
     console.log(e);
     res.status(500).json({ response: "That didn't work" });
