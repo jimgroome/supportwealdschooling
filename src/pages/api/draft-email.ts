@@ -22,8 +22,8 @@ Please use paragraphs and line breaks to make the email more readable. Do not in
     model: "claude-3-5-haiku-latest",
   });
 
-  // @ts-ignore
   const content = message.content
+    // @ts-ignore
     .map((block) => block.text)
     .join("")
     .split("\n\n");
