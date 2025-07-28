@@ -27,7 +27,7 @@ interface FormState {
     grandTotal: number;
     totalResponses: number;
   };
-  message: string;
+  message: string[];
   getMessage: () => void;
 }
 
@@ -81,7 +81,7 @@ const useFormStore = create<FormState>((set, get) => ({
     set({ survey: JSON.parse(res.data.response) });
   },
   survey: { years: [], grandTotal: 0, totalResponses: 0 },
-  message: "",
+  message: [],
   getMessage: async () => {
     const res = await axios.get("/api/draft-email");
     set({ message: res.data.response });

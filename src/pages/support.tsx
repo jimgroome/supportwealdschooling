@@ -11,7 +11,17 @@ const Count = () => {
   return (
     <>
       <SiteHeader />
-      <Typography variant="body1">{message}</Typography>
+      {message.length === 0 ? (
+        <Typography variant="body1" marginBottom={10}>
+          Loading...
+        </Typography>
+      ) : (
+        message.map((line, index) => (
+          <Typography variant="body1" key={index} marginBottom={2}>
+            {line}
+          </Typography>
+        ))
+      )}
     </>
   );
 };

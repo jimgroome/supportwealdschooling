@@ -23,13 +23,16 @@ Please use paragraphs and line breaks to make the email more readable. Do not in
   });
 
   // @ts-ignore
-  const content = message.content.map((block) => block.text).join("");
+  const content = message.content
+    .map((block) => block.text)
+    .join("")
+    .split("\n\n");
 
   res.status(200).json({ response: content });
 };
 
 type Data = {
-  response: string;
+  response: string[];
 };
 
 export default draftEmail;
